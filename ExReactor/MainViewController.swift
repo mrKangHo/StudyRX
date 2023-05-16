@@ -72,7 +72,7 @@ class MainViewController: UIViewController, View {
             .disposed(by: disposeBag)
         
         reactor.state.map{$0.listData}.bind(to: tableView.rx.items(cellIdentifier: "cell")){ index, sss, cell in
-            print(sss)
+            print(sss.email)
           }
           .disposed(by: disposeBag)
         

@@ -23,6 +23,7 @@
 		9B2074502A025F0A00896261 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9B20744F2A025F0A00896261 /* Then */; };
 		9B2074522A02608100896261 /* MainViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2074512A02608100896261 /* MainViewReactor.swift */; };
 		9B3ECBE82A0A7CA30023EF3F /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9B3ECBE72A0A7CA30023EF3F /* RxCocoa-Dynamic */; };
+		9B7CF0F62A13825100E471C3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9B7CF0F52A13825100E471C3 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B2074472A025D7B00896261 /* FlexLayout in Frameworks */,
+				9B7CF0F62A13825100E471C3 /* Alamofire in Frameworks */,
 				9B3ECBE82A0A7CA30023EF3F /* RxCocoa-Dynamic in Frameworks */,
 				9B2074502A025F0A00896261 /* Then in Frameworks */,
 				9B20744B2A025D7B00896261 /* FlexLayoutYogaKit in Frameworks */,
@@ -165,6 +167,7 @@
 				9B20744A2A025D7B00896261 /* FlexLayoutYogaKit */,
 				9B20744F2A025F0A00896261 /* Then */,
 				9B3ECBE72A0A7CA30023EF3F /* RxCocoa-Dynamic */,
+				9B7CF0F52A13825100E471C3 /* Alamofire */,
 			);
 			productName = ExReactor;
 			productReference = 9B20740C2A025C5A00896261 /* ExReactor.app */;
@@ -244,6 +247,7 @@
 				9B2074452A025D7B00896261 /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				9B20744E2A025F0A00896261 /* XCRemoteSwiftPackageReference "Then" */,
 				9B3ECBE62A0A7CA30023EF3F /* XCRemoteSwiftPackageReference "RxSwift" */,
+				9B7CF0F42A13825100E471C3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 9B20740D2A025C5A00896261 /* Products */;
 			projectDirPath = "";
@@ -663,6 +667,14 @@
 				minimumVersion = 6.5.0;
 			};
 		};
+		9B7CF0F42A13825100E471C3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -700,6 +712,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9B3ECBE62A0A7CA30023EF3F /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = "RxCocoa-Dynamic";
+		};
+		9B7CF0F52A13825100E471C3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B7CF0F42A13825100E471C3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
