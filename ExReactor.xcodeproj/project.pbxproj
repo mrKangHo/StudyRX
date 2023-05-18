@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		515B2AEE2A14905400BA34DF /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515B2AED2A14905400BA34DF /* UIViewController+Rx.swift */; };
+		515B2AF02A14915600BA34DF /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515B2AEF2A14915600BA34DF /* TextCell.swift */; };
+		515B2AF22A14917000BA34DF /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515B2AF12A14917000BA34DF /* ImageCell.swift */; };
+		515B2AF92A14958B00BA34DF /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 515B2AF82A14958B00BA34DF /* Differentiator */; };
+		515B2AFB2A14958B00BA34DF /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 515B2AFA2A14958B00BA34DF /* RxDataSources */; };
 		9B2074102A025C5A00896261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20740F2A025C5A00896261 /* AppDelegate.swift */; };
 		9B2074122A025C5A00896261 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2074112A025C5A00896261 /* SceneDelegate.swift */; };
 		9B2074192A025C5B00896261 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B2074182A025C5B00896261 /* Assets.xcassets */; };
@@ -44,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		515B2AED2A14905400BA34DF /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		515B2AEF2A14915600BA34DF /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		515B2AF12A14917000BA34DF /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		9B20740C2A025C5A00896261 /* ExReactor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExReactor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B20740F2A025C5A00896261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B2074112A025C5A00896261 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,10 +75,12 @@
 				9B2074472A025D7B00896261 /* FlexLayout in Frameworks */,
 				9B7CF0F62A13825100E471C3 /* Alamofire in Frameworks */,
 				9B3ECBE82A0A7CA30023EF3F /* RxCocoa-Dynamic in Frameworks */,
+				515B2AFB2A14958B00BA34DF /* RxDataSources in Frameworks */,
 				9B2074502A025F0A00896261 /* Then in Frameworks */,
 				9B20744B2A025D7B00896261 /* FlexLayoutYogaKit in Frameworks */,
 				9B2074442A025D4400896261 /* PinLayout in Frameworks */,
 				9B2074412A025CCC00896261 /* ReactorKit in Frameworks */,
+				515B2AF92A14958B00BA34DF /* Differentiator in Frameworks */,
 				9B2074492A025D7B00896261 /* FlexLayoutYoga in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +132,9 @@
 				9B20741D2A025C5B00896261 /* Info.plist */,
 				9B20744C2A025E4F00896261 /* MainViewController.swift */,
 				9B2074512A02608100896261 /* MainViewReactor.swift */,
+				515B2AED2A14905400BA34DF /* UIViewController+Rx.swift */,
+				515B2AEF2A14915600BA34DF /* TextCell.swift */,
+				515B2AF12A14917000BA34DF /* ImageCell.swift */,
 			);
 			path = ExReactor;
 			sourceTree = "<group>";
@@ -168,6 +181,8 @@
 				9B20744F2A025F0A00896261 /* Then */,
 				9B3ECBE72A0A7CA30023EF3F /* RxCocoa-Dynamic */,
 				9B7CF0F52A13825100E471C3 /* Alamofire */,
+				515B2AF82A14958B00BA34DF /* Differentiator */,
+				515B2AFA2A14958B00BA34DF /* RxDataSources */,
 			);
 			productName = ExReactor;
 			productReference = 9B20740C2A025C5A00896261 /* ExReactor.app */;
@@ -248,6 +263,7 @@
 				9B20744E2A025F0A00896261 /* XCRemoteSwiftPackageReference "Then" */,
 				9B3ECBE62A0A7CA30023EF3F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				9B7CF0F42A13825100E471C3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				515B2AF72A14958B00BA34DF /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 9B20740D2A025C5A00896261 /* Products */;
 			projectDirPath = "";
@@ -291,9 +307,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				515B2AEE2A14905400BA34DF /* UIViewController+Rx.swift in Sources */,
 				9B2074522A02608100896261 /* MainViewReactor.swift in Sources */,
 				9B20744D2A025E4F00896261 /* MainViewController.swift in Sources */,
 				9B2074102A025C5A00896261 /* AppDelegate.swift in Sources */,
+				515B2AF02A14915600BA34DF /* TextCell.swift in Sources */,
+				515B2AF22A14917000BA34DF /* ImageCell.swift in Sources */,
 				9B2074122A025C5A00896261 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,8 +480,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -474,6 +494,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,6 +502,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coke.ExReactor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -492,14 +514,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExReactor/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -507,6 +531,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coke.ExReactor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -627,6 +652,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		515B2AF72A14958B00BA34DF /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		9B20743F2A025CCC00896261 /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactorKit/ReactorKit.git";
@@ -678,6 +711,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		515B2AF82A14958B00BA34DF /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 515B2AF72A14958B00BA34DF /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		515B2AFA2A14958B00BA34DF /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 515B2AF72A14958B00BA34DF /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		9B2074402A025CCC00896261 /* ReactorKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9B20743F2A025CCC00896261 /* XCRemoteSwiftPackageReference "ReactorKit" */;
