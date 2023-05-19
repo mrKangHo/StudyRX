@@ -14,24 +14,6 @@ import RxDataSources
 import Then
 
 
-enum MainSectionItem {
-    case event(String)
-    case banner(Int)
-}
-
-
-struct MainSectionModel {
-    var items:[MainSectionItem]
-}
-
-extension MainSectionModel : SectionModelType {
-    typealias Item = MainSectionItem
-    
-    init(original: MainSectionModel, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
 
 
 class MainViewController: UIViewController, View {
@@ -39,8 +21,7 @@ class MainViewController: UIViewController, View {
     var disposeBag: DisposeBag
     typealias Reactor = MainViewReactor
     
-    lazy var listView = UICollectionView().then {
-        $0.collectionViewLayout = self.createLayout()
+    lazy var listView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
         $0.register(TextCell.self, forCellWithReuseIdentifier: "textCell")
         $0.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         
@@ -69,7 +50,7 @@ class MainViewController: UIViewController, View {
         
         self.view.addSubview(listView)
        
-       
+        
         
 
         // Do any additional setup after loading the view.
@@ -118,13 +99,13 @@ class MainViewController: UIViewController, View {
                    
                    
                    switch item {
-                   case .event(let model):
-                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextCell", for: indexPath) as! TextCell
-                       
+                   case .users(let users):
+                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textCell", for: indexPath) as! TextCell
+                       cell.configure(users.first?.maidenName)
                        return cell
-                   case .banner(let model):
+                   case .products(let product):
                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-                       
+                       cell.configure(product.first?.title)
                        return cell
                    }
                },
@@ -145,7 +126,7 @@ class MainViewController: UIViewController, View {
             .disposed(by: disposeBag)
         
   
-        reactor.state.map{$0.listData}.bind(to: listView.rx.items(dataSource: self.sample())).disposed(by: disposeBag)
+        reactor.state.map{$0.listData}.bind(to: listView.rx.items(dataSource: self.createDataSource())).disposed(by: disposeBag)
         
     }
  

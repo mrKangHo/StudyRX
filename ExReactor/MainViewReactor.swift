@@ -8,6 +8,34 @@
 import Foundation
 import ReactorKit
 import Alamofire
+import RxDataSources
+
+enum MainCellType {
+    case userCell
+    case productCell
+}
+
+enum MainSectionItem {
+    case users([MainUser.User])
+    case products([MainProduct.Product])
+}
+
+
+struct MainSectionModel {
+    var cellType:MainCellType
+    var items:[MainSectionItem]
+}
+
+extension MainSectionModel : SectionModelType {
+    typealias Item = MainSectionItem
+    
+    init(original: MainSectionModel, items: [Item]) {
+        self = original
+        self.items = items
+    }
+}
+
+
 
 class MainViewReactor : Reactor {
     
@@ -17,11 +45,12 @@ class MainViewReactor : Reactor {
     }
     
     enum Mutation {
-        case firstload(MainData)
+        case firstload([MainSectionModel])
     }
     
     struct State {
-        var listData:[MainData.User] = []
+        
+        var listData:[MainSectionModel] = []
     }
     
     
@@ -37,7 +66,23 @@ class MainViewReactor : Reactor {
         
         switch action {
         case .load:
-            return self.load().map(Mutation.firstload)
+            return Observable.combineLatest(self.getUsers(), self.getProducts()).map { users, products in
+                var items:[MainSectionModel] = []
+                if let userList = users.users {
+                    let ss = userList.map { user in
+                        return MainSectionModel(cellType: .userCell, items: [MainSectionItem.users([user])])
+                    }
+                    items.append(contentsOf: ss)
+                }
+                
+                let productList = products.products
+                let ss = productList.map { product in
+                    return MainSectionModel(cellType: .productCell, items: [MainSectionItem.products([product])])
+                }
+                items.append(contentsOf: ss)
+                
+                return Mutation.firstload(items)
+            }
         }
         
     }
@@ -47,9 +92,7 @@ class MainViewReactor : Reactor {
         var newState = state
         switch mutation {
         case .firstload(let data):
-            if let newUsers = data.users {
-                newState.listData.append(contentsOf: newUsers)
-            }
+            newState.listData = data
         }
         return newState
     }
@@ -57,12 +100,12 @@ class MainViewReactor : Reactor {
 }
 
 extension MainViewReactor {
-    func load() -> Observable<MainData> {
+    func getUsers() -> Observable<MainUser> {
         
         guard let url = URL(string: "https://dummyjson.com/users") else { return Observable.empty()}
         
         return Observable.create { observer -> Disposable in
-            AF.request(url, method: .get).responseDecodable(of: MainData.self) { response in
+            AF.request(url, method: .get).responseDecodable(of: MainUser.self) { response in
                 switch response.result {
                 case .success(let data):
                     print(data)
@@ -78,13 +121,29 @@ extension MainViewReactor {
             return Disposables.create()
             
         }
- 
-
+    }
+    
+    func getProducts() -> Observable<MainProduct> {
+        guard let url = URL(string:"https://dummyjson.com/products/") else { return Observable.empty()}
+        return Observable.create { observer -> Disposable in
+            AF.request(url, method: .get).responseDecodable(of:MainProduct.self) { response in
+                switch response.result {
+                case .success(let data):
+                    observer.onNext(data)
+                    break
+                case .failure(let error):
+                    print(error)
+                    observer.onError(error)
+                    break
+                }
+            }
+            return Disposables.create()
+        }
     }
 }
 
 
-struct MainData: Decodable {
+struct MainUser: Decodable {
 
     let total: Int?
     let limit: Int?
@@ -116,5 +175,32 @@ struct MainData: Decodable {
     }
 
 
+
+}
+
+struct MainProduct: Codable {
+
+    let total: Int
+    let limit: Int
+
+    struct Product: Codable {
+
+        let brand: String
+        let images: [String]
+        let id: Int
+        let thumbnail: String
+        let description: String
+        let title: String
+        let rating: Double
+        let discountPercentage: Double
+        let category: String
+        let price: Int
+        let stock: Int
+    
+    }
+
+    let products: [Product]
+
+    let skip: Int
 
 }

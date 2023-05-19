@@ -9,8 +9,14 @@
 import UIKit
 import PinLayout
 import FlexLayout
-
+import Then
 class TextCell: UICollectionViewCell {
+    
+    fileprivate let lbTitle:UILabel = UILabel().then {
+        $0.font = .boldSystemFont(ofSize: 18)
+        $0.textColor = .white
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initLayout()
@@ -25,6 +31,7 @@ class TextCell: UICollectionViewCell {
     func initLayout() {
         self.backgroundColor = .blue
         contentView.flex.define { flex in
+            flex.addItem(lbTitle)
         }
     }
     
@@ -51,8 +58,9 @@ class TextCell: UICollectionViewCell {
     }
     
     
-    func configure() {
-        
+    func configure(_ text:String?) {
+        self.lbTitle.text = text
+        self.lbTitle.flex.markDirty()
         self.needUpdate()
     }
     
