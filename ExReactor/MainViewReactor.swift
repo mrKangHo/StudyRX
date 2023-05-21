@@ -16,8 +16,8 @@ enum MainCellType {
 }
 
 enum MainSectionItem {
-    case users([MainUser.User])
-    case products([MainProduct.Product])
+    case users(MainUser.User)
+    case products(MainProduct.Product)
 }
 
 
@@ -42,14 +42,16 @@ class MainViewReactor : Reactor {
     
     enum Action {
         case load
+        case choiceItems(IndexPath)
     }
     
     enum Mutation {
         case firstload([MainSectionModel])
+        case selectedItem(Int)
     }
     
     struct State {
-        
+        var selectedItems:Int = 0
         var listData:[MainSectionModel] = []
     }
     
@@ -69,20 +71,20 @@ class MainViewReactor : Reactor {
             return Observable.combineLatest(self.getUsers(), self.getProducts()).map { users, products in
                 var items:[MainSectionModel] = []
                 if let userList = users.users {
-                    let ss = userList.map { user in
-                        return MainSectionModel(cellType: .userCell, items: [MainSectionItem.users([user])])
-                    }
-                    items.append(contentsOf: ss)
+                    let userSectionItems = userList.map{MainSectionItem.users($0)}
+                    items.append(MainSectionModel(cellType: .userCell, items: userSectionItems))
                 }
                 
                 let productList = products.products
-                let ss = productList.map { product in
-                    return MainSectionModel(cellType: .productCell, items: [MainSectionItem.products([product])])
-                }
-                items.append(contentsOf: ss)
+                
+                let productSectionItems = productList.map{MainSectionItem.products($0)}
+                
+                items.append(MainSectionModel(cellType: .productCell, items: productSectionItems))
                 
                 return Mutation.firstload(items)
             }
+        case .choiceItems(let indexPath):
+            return Observable.just(Mutation.selectedItem(indexPath.row))
         }
         
     }
@@ -93,7 +95,12 @@ class MainViewReactor : Reactor {
         switch mutation {
         case .firstload(let data):
             newState.listData = data
+            break
+        case .selectedItem(let index):
+            newState.selectedItems = index
+            break
         }
+
         return newState
     }
     

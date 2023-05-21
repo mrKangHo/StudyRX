@@ -47,13 +47,8 @@ class MainViewController: UIViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        
         self.view.addSubview(listView)
-       
-        
-        
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillLayoutSubviews() {
@@ -64,14 +59,15 @@ class MainViewController: UIViewController, View {
     }
     private func createLayout() -> UICollectionViewLayout {
             let layout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
-//                let section = self.sections[sectionIndex]
+                
+                print("Section = \(sectionIndex) env = \(environment)")
                 
                 // Item 설정
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 // Group 설정
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
                 group.interItemSpacing = .fixed(10)
                 
@@ -86,26 +82,18 @@ class MainViewController: UIViewController, View {
             
             return layout
         }
-    
-    func sample() -> RxCollectionViewSectionedReloadDataSource<MainSectionModel> {
-        return RxCollectionViewSectionedReloadDataSource<MainSectionModel> { source, view, indexPath, item in
-            return UICollectionViewCell()
-           }
-    }
-    
+
     private func createDataSource() -> RxCollectionViewSectionedReloadDataSource<MainSectionModel> {
            return RxCollectionViewSectionedReloadDataSource<MainSectionModel>(
                configureCell: { dataSource, collectionView, indexPath, item in
-                   
-                   
                    switch item {
                    case .users(let users):
                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textCell", for: indexPath) as! TextCell
-                       cell.configure(users.first?.maidenName)
+                       cell.configure(users.maidenName)
                        return cell
                    case .products(let product):
                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-                       cell.configure(product.first?.title)
+                       cell.configure(product.title)
                        return cell
                    }
                },
@@ -127,6 +115,16 @@ class MainViewController: UIViewController, View {
         
   
         reactor.state.map{$0.listData}.bind(to: listView.rx.items(dataSource: self.createDataSource())).disposed(by: disposeBag)
+        self.listView.rx.itemSelected.subscribe { indexPath in
+            print("Section = \(indexPath.element?.section) Row = \(indexPath.element?.row)")
+        }.disposed(by: disposeBag)
+        
+        
+        self.listView.rx.itemSelected.map{ indexPath in Reactor.Action.choiceItems(indexPath)}.bind(to: reactor.action).disposed(by: disposeBag)
+        
+        reactor.state.map{$0.selectedItems}.subscribe { index in
+            
+        }
         
     }
  
