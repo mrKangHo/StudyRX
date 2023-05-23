@@ -10,19 +10,13 @@ import ReactorKit
 import Alamofire
 import RxDataSources
 
-enum MainCellType {
-    case userCell
-    case productCell
-}
-
 enum MainSectionItem {
     case users(MainUser.User)
     case products(MainProduct.Product)
+    
 }
 
-
 struct MainSectionModel {
-    var cellType:MainCellType
     var items:[MainSectionItem]
 }
 
@@ -42,12 +36,10 @@ class MainViewReactor : Reactor {
     
     enum Action {
         case load
-        case choiceItems(IndexPath)
     }
     
     enum Mutation {
         case firstload([MainSectionModel])
-        case selectedItem(Int)
     }
     
     struct State {
@@ -72,19 +64,18 @@ class MainViewReactor : Reactor {
                 var items:[MainSectionModel] = []
                 if let userList = users.users {
                     let userSectionItems = userList.map{MainSectionItem.users($0)}
-                    items.append(MainSectionModel(cellType: .userCell, items: userSectionItems))
+                    items.append(MainSectionModel(items: userSectionItems))
+                    
                 }
                 
                 let productList = products.products
                 
                 let productSectionItems = productList.map{MainSectionItem.products($0)}
                 
-                items.append(MainSectionModel(cellType: .productCell, items: productSectionItems))
+                items.append(MainSectionModel(items: productSectionItems))
                 
                 return Mutation.firstload(items)
             }
-        case .choiceItems(let indexPath):
-            return Observable.just(Mutation.selectedItem(indexPath.row))
         }
         
     }
@@ -95,9 +86,6 @@ class MainViewReactor : Reactor {
         switch mutation {
         case .firstload(let data):
             newState.listData = data
-            break
-        case .selectedItem(let index):
-            newState.selectedItems = index
             break
         }
 
