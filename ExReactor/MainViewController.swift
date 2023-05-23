@@ -22,7 +22,7 @@ class MainViewController: UIViewController, View {
     typealias Reactor = MainViewReactor
     
     lazy var listView = UICollectionView(frame: .zero, collectionViewLayout: MainLayout.create()).then {
-        $0.register(TextCell.self, forCellWithReuseIdentifier: "textCell")
+        $0.register(TextCell.self, forCellWithReuseIdentifier: "TextCell")
         $0.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         
     }
@@ -62,16 +62,9 @@ class MainViewController: UIViewController, View {
     private func createDataSource() -> RxCollectionViewSectionedReloadDataSource<MainSectionModel> {
            return RxCollectionViewSectionedReloadDataSource<MainSectionModel>(
                configureCell: { dataSource, collectionView, indexPath, item in
-                   switch item {
-                   case .users(let users):
-                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textCell", for: indexPath) as! TextCell
-                       cell.configure(users.maidenName)
-                       return cell
-                   case .products(let product):
-                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-                       cell.configure(product.title)
-                       return cell
-                   }
+                   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: type(of: item).reuseId, for: indexPath)
+                   item.configure(cell: cell)
+                   return cell
                }
            )
        }

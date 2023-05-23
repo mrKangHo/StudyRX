@@ -10,7 +10,11 @@ import UIKit
 import PinLayout
 import FlexLayout
 import Then
-class TextCell: UICollectionViewCell {
+import NBModel
+
+class TextCell: UICollectionViewCell,ConfigurableCell {
+    
+    
     
     fileprivate let lbTitle:UILabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 18)
@@ -57,12 +61,12 @@ class TextCell: UICollectionViewCell {
         
     }
     
-    
-    func configure(_ text:String?) {
-        self.lbTitle.text = text
+    func configure(data user: MainUser.User?) {
+        self.lbTitle.text = user?.lastName
         self.lbTitle.flex.markDirty()
         self.needUpdate()
     }
+ 
     
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {

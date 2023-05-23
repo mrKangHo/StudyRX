@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		51425BC82A1B515F009B7E17 /* MainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51425BC72A1B515F009B7E17 /* MainLayout.swift */; };
+		5149305F2A1C8FD30004516C /* NBModel in Frameworks */ = {isa = PBXBuildFile; productRef = 5149305E2A1C8FD30004516C /* NBModel */; };
 		515B2AEE2A14905400BA34DF /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515B2AED2A14905400BA34DF /* UIViewController+Rx.swift */; };
 		515B2AF02A14915600BA34DF /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515B2AEF2A14915600BA34DF /* TextCell.swift */; };
 		515B2AF22A14917000BA34DF /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515B2AF12A14917000BA34DF /* ImageCell.swift */; };
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5149305F2A1C8FD30004516C /* NBModel in Frameworks */,
 				9B2074472A025D7B00896261 /* FlexLayout in Frameworks */,
 				9B7CF0F62A13825100E471C3 /* Alamofire in Frameworks */,
 				518C61AA2A1767A20032C1CA /* RxCocoa in Frameworks */,
@@ -189,6 +191,7 @@
 				515B2AFA2A14958B00BA34DF /* RxDataSources */,
 				518C61A92A1767A20032C1CA /* RxCocoa */,
 				518C61AB2A1767A20032C1CA /* RxSwift */,
+				5149305E2A1C8FD30004516C /* NBModel */,
 			);
 			productName = ExReactor;
 			productReference = 9B20740C2A025C5A00896261 /* ExReactor.app */;
@@ -270,6 +273,7 @@
 				9B7CF0F42A13825100E471C3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				515B2AF72A14958B00BA34DF /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				518C61A82A1767A20032C1CA /* XCRemoteSwiftPackageReference "RxSwift" */,
+				5149305D2A1C8FD30004516C /* XCRemoteSwiftPackageReference "NBModel-iOS" */,
 			);
 			productRefGroup = 9B20740D2A025C5A00896261 /* Products */;
 			projectDirPath = "";
@@ -659,6 +663,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5149305D2A1C8FD30004516C /* XCRemoteSwiftPackageReference "NBModel-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nolbal/NBModel-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.3;
+			};
+		};
 		515B2AF72A14958B00BA34DF /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
@@ -718,6 +730,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5149305E2A1C8FD30004516C /* NBModel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5149305D2A1C8FD30004516C /* XCRemoteSwiftPackageReference "NBModel-iOS" */;
+			productName = NBModel;
+		};
 		515B2AF82A14958B00BA34DF /* Differentiator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 515B2AF72A14958B00BA34DF /* XCRemoteSwiftPackageReference "RxDataSources" */;

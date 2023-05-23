@@ -9,27 +9,25 @@ import Foundation
 import ReactorKit
 import Alamofire
 import RxDataSources
+import UIKit
+import NBModel
 
-enum MainSectionItem {
-    case users(MainUser.User)
-    case products(MainProduct.Product)
-    
-}
+
+typealias UserCellConfig = CollectionViewCellConfigurator<TextCell, MainUser.User?>
+typealias ProductCellConfig = CollectionViewCellConfigurator<ImageCell, MainProduct.Product?>
 
 struct MainSectionModel {
-    var items:[MainSectionItem]
+    var items:[CellConfigurator]
 }
 
 extension MainSectionModel : SectionModelType {
-    typealias Item = MainSectionItem
+    typealias Item = CellConfigurator
     
     init(original: MainSectionModel, items: [Item]) {
         self = original
         self.items = items
     }
 }
-
-
 
 class MainViewReactor : Reactor {
     
@@ -63,14 +61,17 @@ class MainViewReactor : Reactor {
             return Observable.combineLatest(self.getUsers(), self.getProducts()).map { users, products in
                 var items:[MainSectionModel] = []
                 if let userList = users.users {
-                    let userSectionItems = userList.map{MainSectionItem.users($0)}
+                    
+                    
+                    
+                    let userSectionItems = userList.map{UserCellConfig(item: $0)}
                     items.append(MainSectionModel(items: userSectionItems))
                     
                 }
                 
                 let productList = products.products
                 
-                let productSectionItems = productList.map{MainSectionItem.products($0)}
+                let productSectionItems = productList.map{ProductCellConfig(item: $0)}
                 
                 items.append(MainSectionModel(items: productSectionItems))
                 

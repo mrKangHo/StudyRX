@@ -10,8 +10,9 @@ import UIKit
 import PinLayout
 import FlexLayout
 import Then
+import NBModel
 
-class ImageCell: UICollectionViewCell {
+class ImageCell: UICollectionViewCell, ConfigurableCell {
     fileprivate let lbTitle:UILabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 18)
         $0.textColor = .black
@@ -57,13 +58,11 @@ class ImageCell: UICollectionViewCell {
         
     }
     
-    
-    func configure(_ text:String?) {
-        self.lbTitle.text = text
+    func configure(data product:MainProduct.Product?) {
+        self.lbTitle.text = product?.title
         self.lbTitle.flex.markDirty()
         self.needUpdate()
     }
-    
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         contentView.pin.width(size.width)
